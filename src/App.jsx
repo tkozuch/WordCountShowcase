@@ -19,7 +19,6 @@ function App() {
     const locals = pyodide.toPy({ posts: data, word: "et" });
     let countWords = pyodide.runPython(`
         def countWords(data):
-            print(data["word"], data["posts"])
             return {post["id"]: post["body"].split().count(data["word"]) for post in data["posts"]}
         countWords
     `);
@@ -33,14 +32,9 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      console.log("data present");
       calculateWords(data);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log("word count changed: ", wordCount);
-  }, [wordCount]);
 
   return (
     <>
@@ -63,7 +57,7 @@ function App() {
               })}
             </div>
           )} */}
-          <Chart></Chart>
+          <Chart data={wordCount}></Chart>
         </div>
       ) : (
         <div>No data</div>

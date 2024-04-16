@@ -9,22 +9,22 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+function Chart({ data }) {
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
-function Chart() {
-  const data = {
-    labels: ["a", "b", "c", "d", " 5"],
+  const chartData = {
+    labels: [...data.keys()],
     datasets: [
       {
         label: "Occurences of word x",
-        data: [0, 2, 4, 0, 2],
+        data: [...data.values()],
       },
     ],
   };
@@ -60,7 +60,7 @@ function Chart() {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return <Bar data={chartData} options={options} />;
 }
 
 export default Chart;
