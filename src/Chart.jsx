@@ -8,8 +8,9 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import zoomPlugin from "chartjs-plugin-zoom";
 
-function Chart({ data }) {
+function Chart({ data, label }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -17,29 +18,42 @@ function Chart({ data }) {
     Title,
     Tooltip,
     Legend
+    // zoomPlugin
   );
 
   const chartData = {
     labels: [...data.keys()],
     datasets: [
       {
-        label: "Occurences of word x",
+        label: label,
         data: [...data.values()],
       },
     ],
   };
 
   const options = {
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
+      },
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: "x",
+        },
       },
     },
     scales: {
       x: {
         title: {
           text: "Post ID",
-          display: true,
+          display: false,
         },
         grid: {
           display: false,
@@ -48,13 +62,10 @@ function Chart({ data }) {
       y: {
         title: {
           text: "Count of word",
-          display: true,
+          display: false,
         },
         ticks: {
           precision: 0,
-        },
-        grid: {
-          display: false,
         },
       },
     },
