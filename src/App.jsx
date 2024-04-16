@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 
 import { getRequestWithNativeFetch } from "./utilities";
+import Chart from "./Chart";
 
 function App() {
   /**
@@ -50,7 +51,7 @@ function App() {
       ) : data ? (
         <div>
           Data:
-          {wordCount && (
+          {/* {wordCount && (
             <div>
               Result:
               {[...wordCount.entries()].map(([postId, wordCount]) => {
@@ -61,7 +62,8 @@ function App() {
                 );
               })}
             </div>
-          )}
+          )} */}
+          <Chart></Chart>
         </div>
       ) : (
         <div>No data</div>
