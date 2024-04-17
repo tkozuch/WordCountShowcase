@@ -25,4 +25,4 @@ react-chart-js-2 https://react-chartjs-2.js.org/
 
 chartjs zoom plugin https://www.chartjs.org/chartjs-plugin-zoom/latest/
 
-Mostly standard features were used, + extending Tailwind with simple fallback value for `svh` in the config.
+From non-standard features used, Tailwind was extended with simple fallback value for `svh` in the config.
