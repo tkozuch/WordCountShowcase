@@ -27,6 +27,7 @@ function Chart({ data, label }) {
       {
         label: label,
         data: [...data.values()],
+        backgroundColor: "#a3a3a3",
       },
     ],
   };
@@ -57,6 +58,13 @@ function Chart({ data, label }) {
         },
         grid: {
           display: false,
+          color: "#a3a3a350",
+        },
+        ticks: {
+          color: "#a3a3a3",
+        },
+        border: {
+          color: "#a3a3a350",
         },
       },
       y: {
@@ -66,6 +74,13 @@ function Chart({ data, label }) {
         },
         ticks: {
           precision: 0,
+          color: "#a3a3a3",
+        },
+        grid: {
+          color: "#a3a3a350",
+        },
+        border: {
+          color: "#a3a3a350",
         },
       },
     },
