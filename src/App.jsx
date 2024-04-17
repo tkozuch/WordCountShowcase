@@ -59,7 +59,7 @@ function App() {
         "No data to analyze."
       ) : (
         <>
-          <div className="text-2xl font-bold md:text-5xl mb-[5vh] text-center">
+          <div className="text-3xl font-bold md:text-5xl mb-[5vh] text-center">
             Occurences of word: &quot;{wordToCount}&quot;
           </div>
           <div className="self-end mb-4 flex items-center">
