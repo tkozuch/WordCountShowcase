@@ -6,7 +6,6 @@ import Chart from "./Chart";
 
 function App() {
   const wordToCount = "et";
-  const topPopularWords = 5;
   /**
    * @type {{data: {userId: Number, id: Number, title: String, body: String}[]}}
    */
@@ -15,7 +14,6 @@ function App() {
     getRequestWithNativeFetch
   );
   const [wordCount, setWordCount] = useState(new Map());
-  const [popularWords, setPopularWords] = useState([]);
 
   async function calculateWords(data) {
     let pyodide = await window.loadPyodide();
@@ -33,38 +31,9 @@ function App() {
     }
   }
 
-  async function mostCommonWords(data) {
-    var wordCounts = {};
-
-    for (var i = 0; i < data.length; i++) {
-      var words = data[i].body.split(/\b/);
-      for (var j = 0; j < words.length; j++) {
-        if (/^[a-zA-Z]+$/.test(words[j])) {
-          wordCounts["_" + words[j]] = (wordCounts["_" + words[j]] || 0) + 1;
-        }
-      }
-    }
-
-    var sortable = [];
-    for (var word in wordCounts) {
-      console.log("in js", word);
-      sortable.push([word.replaceAll("_", ""), wordCounts[word]]);
-    }
-
-    sortable.sort(function (a, b) {
-      return b[1] - a[1];
-    });
-
-    let mostPopular = sortable.slice(0, topPopularWords);
-    let wordsOnly = mostPopular.map((el) => el[0]);
-
-    setPopularWords(wordsOnly);
-  }
-
   useEffect(() => {
     if (data) {
       calculateWords(data);
-      mostCommonWords(data);
     }
   }, [data]);
 
