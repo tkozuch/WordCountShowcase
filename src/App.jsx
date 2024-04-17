@@ -47,7 +47,7 @@ function App() {
   }, [posts]);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-xl">
+    <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-3xl">
       {isLoading || !wordCount ? (
         "Loading..."
       ) : error ? (
