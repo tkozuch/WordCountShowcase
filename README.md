@@ -24,5 +24,3 @@ pyodide (CPython port into WebAssembly) https://github.com/pyodide/pyodide
 react-chart-js-2 https://react-chartjs-2.js.org/
 
 chartjs zoom plugin https://www.chartjs.org/chartjs-plugin-zoom/latest/
-
-From non-standard features used, Tailwind was extended with simple fallback value for `svh` in the config.
