@@ -87,7 +87,7 @@ function App() {
               label={`Word "${wordToCount}" count`}
             ></Chart>
           </div>
-          <div className="text-sm mt-12 self-start pl-8 opacity-50 font-thin break-word">
+          <div className="text-sm lg:text-base mt-12 self-start pl-8 opacity-50 font-thin break-word">
             Number of word: &quot;{wordToCount}&quot; occurrences in the body of
             posts fetched from{" "}
             <a
