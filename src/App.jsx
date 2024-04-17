@@ -38,17 +38,20 @@ function App() {
   }, [data]);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center bg-neutral-600">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-neutral-600 text-white">
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="text-xl flex flex-col justify-center">Loading...</div>
       ) : error ? (
-        <div>Error: {error}</div>
+        <div className="text-xl flex flex-col text-center">
+          <span>Error while fetching the data: </span>
+          <span className="text-base text-center mt-4">{error.message}</span>
+        </div>
       ) : data ? (
         <div
           data-x-label="Post ID"
           data-y-label={`Word "${wordToCount}" count`}
           className={
-            "max-w-60 lg:max-w-7xl overflow-auto mx-auto after:content-[attr(data-x-label)] " +
+            "max-w-60 lg:max-w-7xl overflow-auto after:content-[attr(data-x-label)] " +
             // additional titles
             "after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-12 after:text-white before:text-white"
           }
