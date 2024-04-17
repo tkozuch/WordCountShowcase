@@ -6,11 +6,12 @@ import Chart from "./Chart";
 
 function App() {
   const wordToCount = "et";
+  const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
   /**
    * @type {{data: {userId: Number, id: Number, title: String, body: String}[]}}
    */
   const { data, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
+    apiEndpoint,
     getRequestWithNativeFetch
   );
   const [wordCount, setWordCount] = useState(new Map());
@@ -38,15 +39,17 @@ function App() {
   }, [data]);
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl">
+    <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-xl">
       {isLoading ? (
-        <div className="text-xl flex flex-col justify-center">Loading...</div>
+        "Loading..."
       ) : error ? (
-        <div className="text-xl flex flex-col text-center">
+        <div className="flex flex-col text-center">
           <span>Error while fetching the data: </span>
           <span className="text-base text-center mt-4">{error.message}</span>
         </div>
-      ) : data ? (
+      ) : !data ? (
+        "No data"
+      ) : (
         <div
           data-x-label="Post ID"
           data-y-label={`Word "${wordToCount}" count`}
@@ -60,8 +63,6 @@ function App() {
         >
           <Chart data={wordCount} label={`Word "${wordToCount}" count`}></Chart>
         </div>
-      ) : (
-        <div>No data</div>
       )}
     </div>
   );
