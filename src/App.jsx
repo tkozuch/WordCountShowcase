@@ -59,11 +59,11 @@ function App() {
         "No data to analyze."
       ) : (
         <>
-          <div className="self-start mb-4 flex items-center">
-            <img src={info} alt="Info icon" className="size-6" />
-            <span className="text-sm ml-4">
+          <div className="self-end mb-4 flex items-center">
+            <span className="text-sm mr-4">
               Use mousewheel or fingers to zoom in
             </span>
+            <img src={info} alt="Info icon" className="size-6" />
           </div>
           <div
             data-x-label="Post ID"
