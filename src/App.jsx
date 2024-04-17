@@ -59,19 +59,22 @@ function App() {
         "No data to analyze."
       ) : (
         <>
+          <div className="text-2xl mb-[5vh] text-center">
+            Occurences of word: &quot;{wordToCount}&quot;
+          </div>
           <div className="self-end mb-4 flex items-center">
-            <span className="text-sm mr-4">
+            <span className="text-xs xl:text-sm mr-4">
               Use mousewheel or fingers to zoom in
             </span>
-            <img src={info} alt="Info icon" className="size-6" />
+            <img src={info} alt="Info icon" className="size-4 xl:size-6" />
           </div>
           <div
             data-x-label="Post ID"
-            data-y-label={`Word "${wordToCount}" count`}
+            data-y-label={`Occurrences`}
             className={
               "w-full h-1/3 overflow-auto after:content-[attr(data-x-label)] " +
               // additional titles
-              "after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-8 after:text-white before:text-white" +
+              "relative overflow-visible after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-8 after:text-white before:text-white" +
               // accommodate for title
               " pl-6"
             }
