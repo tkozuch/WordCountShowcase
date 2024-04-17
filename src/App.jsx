@@ -65,7 +65,7 @@ function App() {
           >
             Occurrences of word: &quot;{wordToCount}&quot;
           </div>
-          <div className="self-end mb-4 flex items-center">
+          <div className="self-end mb-4 flex items-center font-light">
             <span className="text-xs xl:text-sm mr-4">
               Use mousewheel or fingers to zoom in
             </span>
