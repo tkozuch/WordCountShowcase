@@ -61,9 +61,9 @@ function App() {
         <>
           <div
             className="text-3xl font-bold md:text-5xl mb-[5vh] text-center"
-            title={`Occurences of word: "${wordToCount}" in ${apiEndpoint} data`}
+            title={`Occurrences of word: "${wordToCount}" in ${apiEndpoint} data`}
           >
-            Occurences of word: &quot;{wordToCount}&quot;
+            Occurrences of word: &quot;{wordToCount}&quot;
           </div>
           <div className="self-end mb-4 flex items-center">
             <span className="text-xs xl:text-sm mr-4">
@@ -86,6 +86,16 @@ function App() {
               data={wordCount}
               label={`Word "${wordToCount}" count`}
             ></Chart>
+          </div>
+          <div className="text-base mt-12  opacity-50 font-thin break-word">
+            Occurrences are taken from the body of posts fetched from{" "}
+            <a
+              href={apiEndpoint}
+              className="cursor-pointer text-blue-200 underline break-all"
+            >
+              {apiEndpoint}
+            </a>
+            .
           </div>
         </>
       )}
