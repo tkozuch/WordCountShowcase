@@ -59,7 +59,7 @@ function App() {
         "No data to analyze."
       ) : (
         <>
-          <div className="self-start mb-4 flex ">
+          <div className="self-start mb-4 flex items-center">
             <img src={info} alt="Info icon" className="size-6" />
             <span className="text-sm ml-4">
               Use mousewheel or fingers to zoom in
