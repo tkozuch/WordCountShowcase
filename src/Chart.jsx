@@ -10,6 +10,12 @@ import {
 import { Bar } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 
+/**
+ * Bar chart component.
+ *
+ * @param {Map<Number, Number>} data
+ * @param {string} label
+ */
 function Chart({ data, label }) {
   ChartJS.register(
     CategoryScale,
