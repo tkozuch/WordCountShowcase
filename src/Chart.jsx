@@ -85,10 +85,10 @@ function Chart({ data, label }) {
       },
     },
     layout: {
-      //   padding: {
-      //     right: 10,
-      //     left: 10,
-      //   },
+      padding: {
+        right: 10,
+        left: 10,
+      },
     },
   };
 
