@@ -101,7 +101,7 @@ function App() {
             data-y-label={`Word "${wordToCount}" count`}
             className="max-w-60 lg:max-w-7xl overflow-auto mx-auto after:content-[attr(data-x-label)] after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-12 after:text-white before:text-white"
           >
-            <div className="w-[2000px] h-96">
+            <div className="w-60 h-80">
               <Chart
                 data={wordCount}
                 label={`Word "${wordToCount}" count`}

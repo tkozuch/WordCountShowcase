@@ -17,12 +17,12 @@ function Chart({ data, label }) {
     BarElement,
     Title,
     Tooltip,
-    Legend
-    // zoomPlugin
+    Legend,
+    zoomPlugin
   );
 
   const chartData = {
-    labels: [...data.keys()],
+    labels: [...data.keys().map((k) => k.toString())],
     datasets: [
       {
         label: label,
@@ -83,6 +83,12 @@ function Chart({ data, label }) {
           color: "#a3a3a350",
         },
       },
+    },
+    layout: {
+      //   padding: {
+      //     right: 10,
+      //     left: 10,
+      //   },
     },
   };
 
