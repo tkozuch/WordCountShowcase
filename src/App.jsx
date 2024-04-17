@@ -17,6 +17,9 @@ function App() {
    * Calculate count of a given word in posts body.
    *
    * @param {{id: Number, body: String}[]} posts
+   * @param {string} word
+   *
+   * @returns {Map<Number, Number>} PostId -> Occurrences mapping
    */
   async function calculateOccurrences(posts, word) {
     let pyodide = await window.loadPyodide();
@@ -28,21 +31,23 @@ function App() {
     `);
 
     let result = countWords(locals);
-    if (result) {
-      let unpack = result.toJs();
-      setWordCount(unpack);
-    }
+    if (!result) return new Map();
+
+    let unpack = result.toJs();
+    return unpack;
   }
 
   useEffect(() => {
     if (posts) {
-      calculateOccurrences(posts, wordToCount);
+      calculateOccurrences(posts, wordToCount).then((occurrences) =>
+        setWordCount(occurrences)
+      );
     }
   }, [posts]);
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-xl">
-      {isLoading ? (
+      {isLoading || !wordCount ? (
         "Loading..."
       ) : error ? (
         <div className="flex flex-col text-center">
@@ -50,7 +55,7 @@ function App() {
           <span className="text-base text-center mt-4">{error.message}</span>
         </div>
       ) : !posts ? (
-        "No data"
+        "No data to analyze."
       ) : (
         <div
           data-x-label="Post ID"
