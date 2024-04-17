@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 
-import { getRequestWithNativeFetch } from "./utilities";
+import { getPostsBody } from "./utilities";
 import Chart from "./Chart";
 
 function App() {
   const wordToCount = "et";
   const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
   /**
-   * @type {{data: {userId: Number, id: Number, title: String, body: String}[]}}
+   * @type {{posts: {id: Number, body: String}[]}}
    */
-  const { data, error, isLoading } = useSWR(
-    apiEndpoint,
-    getRequestWithNativeFetch
-  );
+  const { data: posts, error, isLoading } = useSWR(apiEndpoint, getPostsBody);
   const [wordCount, setWordCount] = useState(new Map());
 
-  async function calculateWords(data) {
+  /**
+   * Calculate count of a given word in posts body.
+   *
+   * @param {{id: Number, body: String}[]} posts
+   */
+  async function calculateOccurrences(posts, word) {
     let pyodide = await window.loadPyodide();
-    const locals = pyodide.toPy({ posts: data, word: wordToCount });
+    const locals = pyodide.toPy({ posts, word });
     let countWords = pyodide.runPython(`
         def countWords(data):
             return {post["id"]: post["body"].split().count(data["word"].lower()) for post in data["posts"]}
@@ -33,10 +35,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (data) {
-      calculateWords(data);
+    if (posts) {
+      calculateOccurrences(posts, wordToCount);
     }
-  }, [data]);
+  }, [posts]);
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-xl">
@@ -47,7 +49,7 @@ function App() {
           <span>Error while fetching the data: </span>
           <span className="text-base text-center mt-4">{error.message}</span>
         </div>
-      ) : !data ? (
+      ) : !posts ? (
         "No data"
       ) : (
         <div
