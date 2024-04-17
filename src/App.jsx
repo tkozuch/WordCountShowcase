@@ -3,6 +3,7 @@ import useSWR from "swr";
 
 import { getPostsBody } from "./utilities";
 import Chart from "./Chart";
+import info from "./assets/info.png";
 
 function App() {
   const wordToCount = "et";
@@ -57,19 +58,30 @@ function App() {
       ) : !posts ? (
         "No data to analyze."
       ) : (
-        <div
-          data-x-label="Post ID"
-          data-y-label={`Word "${wordToCount}" count`}
-          className={
-            "w-full h-1/3 overflow-auto after:content-[attr(data-x-label)] " +
-            // additional titles
-            "after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-8 after:text-white before:text-white" +
-            // accommodate for title
-            " pl-6"
-          }
-        >
-          <Chart data={wordCount} label={`Word "${wordToCount}" count`}></Chart>
-        </div>
+        <>
+          <div className="self-start mb-4 flex ">
+            <img src={info} alt="Info icon" className="size-6" />
+            <span className="text-sm ml-4">
+              Use mousewheel or fingers to zoom in
+            </span>
+          </div>
+          <div
+            data-x-label="Post ID"
+            data-y-label={`Word "${wordToCount}" count`}
+            className={
+              "w-full h-1/3 overflow-auto after:content-[attr(data-x-label)] " +
+              // additional titles
+              "after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-8 after:text-white before:text-white" +
+              // accommodate for title
+              " pl-6"
+            }
+          >
+            <Chart
+              data={wordCount}
+              label={`Word "${wordToCount}" count`}
+            ></Chart>
+          </div>
+        </>
       )}
     </div>
   );
