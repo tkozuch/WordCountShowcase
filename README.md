@@ -4,7 +4,7 @@ https://word-count-showcase.netlify.app/
 
 Project showcasing use of WebAssembly to perform simple counting task.
 
-# Set up
+# Setup
 
 ```
 git clone https://github.com/tkozuch/WordCountShowcase.git
