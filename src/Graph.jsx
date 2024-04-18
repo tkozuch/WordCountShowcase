@@ -10,7 +10,7 @@ import { Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 /**
- * Line graph component.
+ * Line graph component. Configures React-ChartJS-2' Line component and returns it.
  *
  * @param {Map<Number, Number>} data
  * @param {string} label
