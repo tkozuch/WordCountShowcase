@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 
 import { getPostsBody } from "./utilities";
-import Chart from "./Chart";
+import Graph from "./Graph";
+import LoadingSpinner from "./LoadingSpinner";
 import info from "./assets/info.png";
 
 function App() {
@@ -48,58 +49,56 @@ function App() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center px-8 md:px-12 lg:px-16 max-w-7xl text-3xl">
-      {isLoading || !wordCount ? (
-        "Loading..."
-      ) : error ? (
-        <div className="flex flex-col text-center">
-          <span>Error while fetching the data: </span>
-          <span className="text-base text-center mt-4">{error.message}</span>
+      <>
+        <div
+          className="text-3xl font-bold md:text-5xl xl:text-7xl mb-[5vh] text-center"
+          title={`Occurrences of word: "${wordToCount}" in ${apiEndpoint} data`}
+        >
+          Occurrences of word: &quot;{wordToCount}&quot;
         </div>
-      ) : !posts ? (
-        "No data to analyze."
-      ) : (
-        <>
-          <div
-            className="text-3xl font-bold md:text-5xl xl:text-7xl mb-[5vh] text-center"
-            title={`Occurrences of word: "${wordToCount}" in ${apiEndpoint} data`}
-          >
-            Occurrences of word: &quot;{wordToCount}&quot;
+        <div className="self-end mb-4 flex items-center font-light">
+          <span className="text-xs xl:text-sm mr-4">
+            Use mousewheel or fingers to zoom in
+          </span>
+          <img src={info} alt="Info icon" className="size-4 xl:size-6" />
+        </div>
+        <main
+          data-x-label="Post ID"
+          data-y-label="Occurrences"
+          className={
+            "w-full h-1/3 " +
+            // additional titles
+            "relative text-base md:text-xl overflow-visible after:content-[attr(data-x-label)] before:content-[attr(data-y-label)] before:-rotate-90 before:-translate-x-1/2 before:pb-8 before:transform-center-y after:transform-center-x" +
+            // accommodate for title
+            " pl-6 "
+          }
+        >
+          {/* Status message wrapper, to display it over the graph */}
+          <div className={"transform-center opacity-50 pointer-events-none"}>
+            {error ? (
+              <div className="flex flex-col text-center ">
+                <span>Error while fetching the data: </span>
+                <span className="text-base text-center mt-4 line-clamp-2">
+                  {error.message}
+                </span>
+              </div>
+            ) : isLoading || !wordCount.size ? (
+              <LoadingSpinner />
+            ) : (
+              !posts && "No data to analyze."
+            )}
           </div>
-          <div className="self-end mb-4 flex items-center font-light">
-            <span className="text-xs xl:text-sm mr-4">
-              Use mousewheel or fingers to zoom in
-            </span>
-            <img src={info} alt="Info icon" className="size-4 xl:size-6" />
-          </div>
-          <div
-            data-x-label="Post ID"
-            data-y-label={`Occurrences`}
-            className={
-              "w-full h-1/3 overflow-auto after:content-[attr(data-x-label)] " +
-              // additional titles
-              "relative text-base md:text-xl overflow-visible after:absolute after:left-1/2 after:-translate-x-1/2 before:content-[attr(data-y-label)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-rotate-90 before:-translate-x-1/2 before:pb-8 after:text-white before:text-white" +
-              // accommodate for title
-              " pl-6"
-            }
-          >
-            <Chart
-              data={wordCount}
-              label={`Word "${wordToCount}" count`}
-            ></Chart>
-          </div>
-          <div className="text-sm lg:text-base mt-12 self-start pl-8 opacity-50 font-thin break-word">
-            Number of word: &quot;{wordToCount}&quot; occurrences in the body of
-            posts fetched from{" "}
-            <a
-              href={apiEndpoint}
-              className="cursor-pointer text-blue-200 underline break-all"
-            >
-              {apiEndpoint}
-            </a>
-            .
-          </div>
-        </>
-      )}
+          <Graph data={wordCount} label={`Word "${wordToCount}" count`}></Graph>
+        </main>
+        <div className="text-sm lg:text-base mt-8 sm:mt-12 self-center text-center sm:self-start sm:text-start sm:pl-8 opacity-50 font-thin break-word">
+          Number of word: &quot;{wordToCount}&quot; occurrences in the body of
+          posts fetched from{" "}
+          <a href={apiEndpoint} className="cursor-pointer  underline break-all">
+            {apiEndpoint}
+          </a>
+          .
+        </div>
+      </>
     </div>
   );
 }

@@ -10,3 +10,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer components {
+  .transform-center-x {
+    @apply absolute left-1/2 -translate-x-1/2;
+  }
+  .transform-center-y {
+    @apply absolute top-1/2 -translate-y-1/2;
+  }
+  .transform-center {
+    @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2;
+  }
+}

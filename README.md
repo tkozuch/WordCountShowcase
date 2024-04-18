@@ -24,3 +24,5 @@ pyodide (CPython port into WebAssembly) https://github.com/pyodide/pyodide
 react-chart-js-2 https://react-chartjs-2.js.org/
 
 chartjs zoom plugin https://www.chartjs.org/chartjs-plugin-zoom/latest/
+
+#### time of work: 2 days

@@ -2,28 +2,26 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
-  Title,
   Tooltip,
-  Legend,
+  PointElement,
+  LineElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 /**
- * Bar chart component.
+ * Line graph component.
  *
  * @param {Map<Number, Number>} data
  * @param {string} label
  */
-function Chart({ data, label }) {
+function Graph({ data, label }) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
-    BarElement,
-    Title,
     Tooltip,
-    Legend,
+    PointElement,
+    LineElement,
     zoomPlugin
   );
 
@@ -34,6 +32,7 @@ function Chart({ data, label }) {
         label: label,
         data: [...data.values()],
         backgroundColor: "#a3a3a3",
+        borderColor: "#00000050",
       },
     ],
   };
@@ -58,10 +57,6 @@ function Chart({ data, label }) {
     },
     scales: {
       x: {
-        title: {
-          text: "Post ID",
-          display: false,
-        },
         grid: {
           display: false,
           color: "#a3a3a350",
@@ -74,10 +69,6 @@ function Chart({ data, label }) {
         },
       },
       y: {
-        title: {
-          text: "Count of word",
-          display: false,
-        },
         ticks: {
           precision: 0,
           color: "#a3a3a3",
@@ -92,13 +83,13 @@ function Chart({ data, label }) {
     },
     layout: {
       padding: {
-        right: 10,
-        left: 10,
+        // make first element little more accessable
+        left: 5,
       },
     },
   };
 
-  return <Bar data={chartData} options={options} />;
+  return <Line data={chartData} options={options} />;
 }
 
-export default Chart;
+export default Graph;
