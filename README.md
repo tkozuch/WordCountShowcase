@@ -25,4 +25,6 @@ react-chart-js-2 https://react-chartjs-2.js.org/
 
 chartjs zoom plugin https://www.chartjs.org/chartjs-plugin-zoom/latest/
 
+flowbite - for spinner component https://flowbite.com/
+
 #### time of work: 2 days - 2.5 days
